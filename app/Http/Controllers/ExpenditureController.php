@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class ExpenditureController extends Controller
 {
     /**
+     * 
      * Display a listing of the resource.
      */
     public function index(Request $request)

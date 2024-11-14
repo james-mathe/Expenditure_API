@@ -14,9 +14,7 @@ class categoryController extends Controller
         $categories = Category::get();
 
         if($categories->count() > 0){
-            return [
-                "Categories"=> CategoryResource::collection($categories)
-            ];
+            return CategoryResource::collection($categories);
         }
 
         return response()->json([
@@ -76,5 +74,23 @@ class categoryController extends Controller
             "message"=> "Category Deleted Successfully"
         ]);
     }
+    public function getAllPaginate(Request $request){
+        $category = category::paginate(5);
 
+        if($request->paginate){
+            $category = category::orderBy("created_at","desc")->paginate($request->paginate);
+        }
+        else{
+            $category = category::orderBy("created_at","desc")->paginate(5);
+        }
+        
+        if($category->count() > 0){
+            return CategoryResource::collection($category);
+        }
+        else{
+            return response()->json([
+                "message"=> "No category found"
+            ]);
+        }
+    }
 }

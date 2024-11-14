@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ExpenditureResource extends JsonResource
+class loginResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,11 @@ class ExpenditureResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
-            "id"=> $this->id,
-            "name"=> $this->name,
-            "amount"=> $this->amount,
-            'category_id'=> $this->category_id,
-            "created_at"=> $this->created_at->format("Y-m-d"),
+            "id"=>$this->id,
+            "uid_user"=>$this->uid_user,
+            "email"=>$this->email,
+            "role"=>$this->role,
+            "created_at"=>$this->created_at->format("Y-m-d"),
         ];
     }
 }

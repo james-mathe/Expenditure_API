@@ -2,27 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ExpenditureResource;
-use App\Models\Expenditure;
+use App\Http\Resources\EntriesResource;
+use App\Models\Entries;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ExpenditureController extends Controller
+class EntriesController extends Controller
 {
-    /**
-     * 
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $expenditure = Expenditure::get();
+        $entrie = Entries::get();
         
-        if($expenditure->count() > 0){
-            return ExpenditureResource::collection($expenditure);
+        if($entrie->count() > 0){
+            return EntriesResource::collection($entrie);
         }
         else{
             return response()->json([
-                "message"=> "No Expenditure found"
+                "message"=> "No Entries found"
             ]);
         }
     }
@@ -44,30 +40,30 @@ class ExpenditureController extends Controller
             ]);
         }
 
-        $expenditure = Expenditure::create([
+        Entries::create([
             "name"=> $request->name,
             "amount"=> $request->amount,
             "category_id"=> $request->category_id
         ]);
         return response()->json([
-            "message"=> "You're Spending monney"
+            "message"=> "You're adding monney"
         ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Expenditure $expenditure)
+    public function show(Entries $entrie)
     {
        
-        return new ExpenditureResource($expenditure);
+        return new EntriesResource($entrie);
         
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Expenditure $expenditure)
+    public function update(Request $request, Entries $entrie)
     {
         $isValide = Validator::make($request->all(),[
             "name"=> "required",
@@ -79,45 +75,44 @@ class ExpenditureController extends Controller
                 "error"=> $isValide->messages()
             ]);
         }
-        $expenditure->update([
+        $entrie->update([
             "name"=> $request->name,
             "amount"=> $request->amount,
             "category_id"=> $request->category_id
         ]);
         return response()->json([
-            "message"=> "Expenditure Updated Successfully"
+            "message"=> "Entries Updated Successfully"
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Expenditure $expenditure)
+    public function destroy(Entries $entrie)
     {
-        $expenditure->delete();
+        $entrie->delete();
         return response()->json([
-            "message"=> "Expenditure Deleted"
+            "message"=> "Entries Deleted"
         ]);
     }
 
     public function getAllPaginate(Request $request){
-        $expenditure = Expenditure::paginate(5);
+        $entrie = Entries::paginate(5);
 
         if($request->paginate){
-            $expenditure = Expenditure::with("category")->orderBy("created_at","desc")->paginate($request->paginate);
+            $entrie = Entries::orderBy("created_at","desc")->paginate($request->paginate);
         }
         else{
-            $expenditure = Expenditure::with("category")->orderBy("created_at","desc")->paginate(5);
+            $entrie = Entries::orderBy("created_at","desc")->paginate(5);
         }
         
-        if($expenditure->count() > 0){
-            return ExpenditureResource::collection($expenditure);
+        if($entrie->count() > 0){
+            return EntriesResource::collection($entrie);
         }
         else{
             return response()->json([
-                "message"=> "No Expenditure found"
+                "message"=> "No Entries found"
             ]);
         }
     }
-    
 }

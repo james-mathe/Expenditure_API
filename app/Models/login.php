@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class login extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "uid_user",
+        "email"
+    ];
 }

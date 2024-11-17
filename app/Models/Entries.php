@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Entries extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "name",
+        "amount",
+        "category_id",
+    ] ;
+
+    public function category(){
+        return $this->belongsTo(category::class);
+    }
 }

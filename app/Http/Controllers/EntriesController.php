@@ -53,17 +53,15 @@ class EntriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Entries $entrie)
+    public function show(Entries $entry)
     {
-       
-        return new EntriesResource($entrie);
-        
+        return new EntriesResource($entry);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Entries $entrie)
+    public function update(Request $request, Entries $entry)
     {
         $isValide = Validator::make($request->all(),[
             "name"=> "required",
@@ -75,24 +73,24 @@ class EntriesController extends Controller
                 "error"=> $isValide->messages()
             ]);
         }
-        $entrie->update([
+        $entry->update([
             "name"=> $request->name,
             "amount"=> $request->amount,
             "category_id"=> $request->category_id
         ]);
         return response()->json([
-            "message"=> "Entries Updated Successfully"
+            "message"=> "Entry Updated Successfully"
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Entries $entrie)
+    public function destroy(Entries $entry)
     {
-        $entrie->delete();
+        $entry->delete();
         return response()->json([
-            "message"=> "Entries Deleted"
+            "message"=> "Entry Deleted"
         ]);
     }
 
@@ -113,6 +111,21 @@ class EntriesController extends Controller
             return response()->json([
                 "message"=> "No Entries found"
             ]);
+        }
+    }
+
+    public function getEntriesByCategory(Request $request){
+        $entry = Entries::select(Entries::raw("id"),Entries::raw("category_id"),Entries::raw("name"),Entries::raw("amount"),Entries::raw("DATE_FORMAT(created_at,'%Y-%m-%d') as Created_at"))
+        ->where("category_id","=",$request->cat)
+        ->get();
+
+        if($entry->count() > 0){
+            return $entry;
+        }
+        else{
+            return[
+                "message"=>"No Entries For this Category"
+            ];
         }
     }
 }

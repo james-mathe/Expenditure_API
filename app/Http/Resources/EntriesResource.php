@@ -19,7 +19,8 @@ class EntriesResource extends JsonResource
             "id"=>$this->id,
             "name"=>$this->name,
             "amount"=>$this->amount,
-            "Created_at"=>$this->created_at->format('Y-m-d')
+            "category_id"=>$this->category_id,
+            "Created_at"=>$this->created_at->format("Y-m-d")
         ];
     }
 }

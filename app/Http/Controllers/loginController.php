@@ -41,7 +41,24 @@ class loginController extends Controller
         ];
     }
 
-    public function show(login $login){
-        return new loginResource($login);
+    public function show(login $log){
+        return new loginResource($log);
+    }
+
+    public function getElementByuid(Request $request){
+
+        $user = login::select(login::raw("id"),login::raw("uid_user"),login::raw("email"),login::raw("role"),login::raw("DATE_FORMAT(created_at,'%Y-%m-%d') as Created_at"))
+        ->where("uid_user","=",$request->uid)
+        ->get();
+
+        if($user->count() > 0){
+            return $user;
+        }
+        else{
+            return [
+                "message"=>"No User Find with This UID!!"
+            ];
+        }
+       
     }
 }

@@ -17,4 +17,8 @@ class category extends Model
     public function expenditure(){
         return $this->hasMany(Expenditure::class);
     }
+
+    public function entrie(){
+        return $this->hasMany(Entries::class);
+    }
 }

@@ -119,5 +119,20 @@ class ExpenditureController extends Controller
             ]);
         }
     }
+
+    public function getExpenditureByCategory(Request $request){
+        $expense = Expenditure::select(Expenditure::raw("id"),Expenditure::raw("category_id"),Expenditure::raw("name"),Expenditure::raw("amount"),Expenditure::raw("DATE_FORMAT(created_at,'%Y-%m-%d') as Created_at"))
+        ->where("category_id","=",$request->cat)
+        ->get();
+
+        if($expense->count() > 0){
+            return $expense;
+        }
+        else{
+            return[
+                "message"=>"No Expense For this Category"
+            ];
+        }
+    }
     
 }

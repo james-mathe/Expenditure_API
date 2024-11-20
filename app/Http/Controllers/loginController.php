@@ -45,6 +45,25 @@ class loginController extends Controller
         return new loginResource($log);
     }
 
+    public function update(Request $request, login $log){
+        $isValid = Validator::make($request->all(),[
+            "role"=>"required"
+        ]);
+
+        if($isValid->fails()){
+            return [
+                "error"=>$isValid->messages()
+            ];
+        }
+
+        $log->update([
+            "role"=>$request->role
+        ]);
+        
+        return [
+            "message"=>"your Role is changed"
+        ];
+    }
     public function getElementByuid(Request $request){
 
         $user = login::select(login::raw("id"),login::raw("uid_user"),login::raw("email"),login::raw("role"),login::raw("DATE_FORMAT(created_at,'%Y-%m-%d') as Created_at"))

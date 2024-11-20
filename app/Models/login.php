@@ -11,6 +11,7 @@ class login extends Model
 
     protected $fillable = [
         "uid_user",
-        "email"
+        "email",
+        "role"
     ];
 }

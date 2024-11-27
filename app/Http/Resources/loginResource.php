@@ -20,7 +20,7 @@ class loginResource extends JsonResource
             "uid_user"=>$this->uid_user,
             "email"=>$this->email,
             "role"=>$this->role,
-            "created_at"=>$this->created_at->format("Y-m-d"),
+            "created_at"=>$this->created_at,
         ];
     }
 }

@@ -42,12 +42,12 @@ class categoryController extends Controller
             "message"=> "Category added Successfully"
         ]);
     }
-    public function show(category $category){
+    public function show(category $Category){
         return [
-            "Category"=>new CategoryResource($category)
+            "Category"=>new CategoryResource($Category)
         ];
     }
-    public function update(Request $request, category $category){
+    public function update(Request $request, category $Category){
         $isValide = Validator::make($request->all(), [
             "name"=> "required",
             "description"=> "required"
@@ -59,7 +59,7 @@ class categoryController extends Controller
             ]);
         }
 
-        $category->update([
+        $Category->update([
             "name"=> $request->name,
             "description"=> $request->description
         ]);
@@ -68,8 +68,8 @@ class categoryController extends Controller
             "message"=> "Category Updated Successfully"
         ]);
     }
-    public function destroy(category $category){
-        $category->delete();
+    public function destroy(category $Category){
+        $Category->delete();
         return response()->json([
             "message"=> "Category Deleted Successfully"
         ]);

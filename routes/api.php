@@ -15,32 +15,32 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
-Route::apiResource("/expenditure",ExpenditureController::class);
-Route::apiResource("/category",categoryController::class);
-Route::apiResource("/tasks",taskController::class);
-Route::apiResource("/entry",EntriesController::class);
-Route::apiResource("/log",loginController::class);
+Route::apiResource("/Expenditure",ExpenditureController::class);
+Route::apiResource("/Category",categoryController::class);
+Route::apiResource("/Tasks",taskController::class);
+Route::apiResource("/Entry",EntriesController::class);
+Route::apiResource("/Log",loginController::class);
 
 // fro authentication
 
-Route::post("Auth/register", [AuthController::class,"register"]);
-Route::post("Auth/login", [AuthController::class,"login"]);
-Route::post("Auth/logout", [AuthController::class,"logout"])->middleware('auth:sanctum');
+Route::post("Auth/Register", [AuthController::class,"register"]);
+Route::post("Auth/Login", [AuthController::class,"login"]);
+Route::post("Auth/Logout", [AuthController::class,"logout"])->middleware('auth:sanctum');
 
-Route::get("Spent/Monthly", [AnalyseController::class,"Monthly"]);
-Route::get("Spent/Daily", [AnalyseController::class,"Daily"]);
-Route::get("Spent/Category", [AnalyseController::class,"Category"]);
-Route::get("entries/Monthly", [AnalyseEntryController::class,"Monthly"]);
-Route::get("entries/Daily", [AnalyseEntryController::class,"Daily"]);
-Route::get("entries/Category", [AnalyseEntryController::class,"Category"]);
-Route::get("login", [loginController::class,"getElementByuid"]);
-Route::get("expense/ByCategory", [ExpenditureController::class,"getExpenditureByCategory"]);
-Route::get("entries/ByCategory", [EntriesController::class,"getEntriesByCategory"]);
+Route::get("Spent/monthly", [AnalyseController::class,"Monthly"]);
+Route::get("Spent/daily", [AnalyseController::class,"Daily"]);
+Route::get("Spent/category", [AnalyseController::class,"Category"]);
+Route::get("entries/monthly", [AnalyseEntryController::class,"Monthly"]);
+Route::get("entries/daily", [AnalyseEntryController::class,"Daily"]);
+Route::get("entries/category", [AnalyseEntryController::class,"Category"]);
+Route::get("Login", [loginController::class,"getElementByuid"]);
+Route::get("expense/byCategory", [ExpenditureController::class,"getExpenditureByCategory"]);
+Route::get("entries/byCategory", [EntriesController::class,"getEntriesByCategory"]);
 // Route::get('exp', [AnalyseController::class,'Mo']);
 
 // for the paginate part
 
-Route::get("paginate/expenditure",[ExpenditureController::class,"getAllPaginate"]);
-Route::get("paginate/category",[categoryController::class,"getAllPaginate"]);
-Route::get("paginate/task",[taskController::class,"getAllPaginate"]);
-Route::get("paginate/entry",[EntriesController::class,"getAllPaginate"]);
+Route::get("paginate/Expenditure",[ExpenditureController::class,"getAllPaginate"]);
+Route::get("paginate/Category",[categoryController::class,"getAllPaginate"]);
+Route::get("paginate/Task",[taskController::class,"getAllPaginate"]);
+Route::get("paginate/Entry",[EntriesController::class,"getAllPaginate"]);

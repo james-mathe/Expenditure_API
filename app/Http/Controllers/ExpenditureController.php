@@ -57,17 +57,17 @@ class ExpenditureController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Expenditure $expenditure)
+    public function show(Expenditure $Expenditure)
     {
        
-        return new ExpenditureResource($expenditure);
+        return new ExpenditureResource($Expenditure);
         
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Expenditure $expenditure)
+    public function update(Request $request, Expenditure $Expenditure)
     {
         $isValide = Validator::make($request->all(),[
             "name"=> "required",
@@ -79,7 +79,7 @@ class ExpenditureController extends Controller
                 "error"=> $isValide->messages()
             ]);
         }
-        $expenditure->update([
+        $Expenditure->update([
             "name"=> $request->name,
             "amount"=> $request->amount,
             "category_id"=> $request->category_id
@@ -92,9 +92,9 @@ class ExpenditureController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Expenditure $expenditure)
+    public function destroy(Expenditure $Expenditure)
     {
-        $expenditure->delete();
+        $Expenditure->delete();
         return response()->json([
             "message"=> "Expenditure Deleted"
         ]);

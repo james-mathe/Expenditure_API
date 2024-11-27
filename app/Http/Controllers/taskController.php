@@ -43,10 +43,10 @@ class taskController extends Controller
         ]);
     }
 
-    public function show(task $task){
-        return new TaskResource($task);
+    public function show(task $Task){
+        return new TaskResource($Task);
     }
-    public function update(Request $request,task $task){
+    public function update(Request $request,task $Task){
         $isValide = Validator::make($request->all(),[
             "name"=>"required",
             "archived"=>"required|boolean"
@@ -58,7 +58,7 @@ class taskController extends Controller
             ]);
         }
 
-        $task->update([
+        $Task->update([
             "name"=>$request->name,
             "archived"=>$request->archived
         ]);
@@ -67,8 +67,8 @@ class taskController extends Controller
             "message"=>"Task Updated"
         ];
     }
-    public function destroy(task $task){
-        $task->delete();
+    public function destroy(task $Task){
+        $Task->delete();
         return [
             "message"=>"Task Deleted"
         ];

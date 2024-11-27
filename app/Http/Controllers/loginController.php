@@ -41,8 +41,8 @@ class loginController extends Controller
         ];
     }
 
-    public function show(login $log){
-        return new loginResource($log);
+    public function show(login $Log){
+        return new loginResource($Log);
     }
 
     public function update(Request $request, login $log){

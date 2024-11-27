@@ -53,15 +53,15 @@ class EntriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Entries $entry)
+    public function show(Entries $Entry)
     {
-        return new EntriesResource($entry);
+        return new EntriesResource($Entry);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Entries $entry)
+    public function update(Request $request, Entries $Entry)
     {
         $isValide = Validator::make($request->all(),[
             "name"=> "required",
@@ -73,7 +73,7 @@ class EntriesController extends Controller
                 "error"=> $isValide->messages()
             ]);
         }
-        $entry->update([
+        $Entry->update([
             "name"=> $request->name,
             "amount"=> $request->amount,
             "category_id"=> $request->category_id
@@ -86,9 +86,9 @@ class EntriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Entries $entry)
+    public function destroy(Entries $Entry)
     {
-        $entry->delete();
+        $Entry->delete();
         return response()->json([
             "message"=> "Entry Deleted"
         ]);
